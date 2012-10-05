@@ -1,4 +1,3 @@
-use strict;
 use warnings;
 
 # This is a common method of declaring package scoped variables before the
