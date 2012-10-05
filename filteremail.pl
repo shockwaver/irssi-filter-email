@@ -6,7 +6,7 @@ use Irssi;
 
 our $VERSION = '1.00';
 our %IRSSI = (
-  authors     => 'Chris Taylor',
+  authors     => 'shockwaver',
   contact     => 'irssi@shockwaver.org',
   name        => 'Filter Email',
   description => 'Script to automatically replace @ in email address to prevent autokicks, '
@@ -20,12 +20,13 @@ sub filter_email {
     my ($text, $server, $win_item) = @_;
 	# check for email address
 	if ($text=~m/[a-z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+\/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/) {
+		# replace @ with [@]
 		$text=~s/@/\[@\]/g;
 	}
 	Irssi::signal_continue($text, $server, $win_item);
 }
 
-my $help = "This script replaced the @ in emails you type with [@]";
+my $help = "Filter Email - \n -- This script replaced the @ in emails you type with [@]";
 
 Irssi::command_bind('help', sub {
 	  if ($_[0] eq 'filteremail') {
