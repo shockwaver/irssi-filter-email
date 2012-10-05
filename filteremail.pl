@@ -1,9 +1,7 @@
+# This script will automatically replace the @ in email address you send to the server with [@]
+# so example@domain.com -> example[@]domain.com
+
 use warnings;
-
-# This is a common method of declaring package scoped variables before the
-# 'our' keyword was introduced.  You should pick one form or the other, but
-# generally speaking, the our $var is preferred in new code.
-
 use Irssi;
 
 our $VERSION = '1.00';
@@ -26,3 +24,13 @@ sub filter_email {
 	}
 	Irssi::signal_continue($text, $server, $win_item);
 }
+
+my $help = "This script replaced the @ in emails you type with [@]";
+
+Irssi::command_bind('help', sub {
+	  if ($_[0] eq 'filteremail') {
+		  Irssi::print($help, MSGLEVEL_CLIENTCRAP);
+		  Irssi::signal_stop;
+	  }
+}
+);
